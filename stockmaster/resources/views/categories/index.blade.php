@@ -1,5 +1,9 @@
 <x-app-layout>
 
+      <x-slot name="title">
+        Categorías
+        </x-slot>
+
     <div class="container mx-auto p-6">
 
         <div class="flex justify-between items-center mb-6">

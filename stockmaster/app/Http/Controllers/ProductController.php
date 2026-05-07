@@ -76,14 +76,29 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
-        'name' => 'required',
-        'sku' => 'required|unique:products',
-        'price' => 'required|numeric|min:1',
-        'stock' => 'required|integer|min:0',
-        'category_id' => 'required'
-    ]);
+   $request->validate(
 
+    [
+            'name' => 'required',
+            'sku' => 'required|unique:products,sku',
+            'price' => 'required|numeric|min:1',
+            'stock' => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,id'
+    ],
+
+    [
+        'price.min' => 'El precio debe ser mayor a 0.',
+        'stock.min' => 'El stock no puede ser negativo.'
+    ],
+    [
+        'price' => 'precio',
+        'stock' => 'stock',
+        'name' => 'nombre',
+        'sku' => 'SKU',
+        'category_id' => 'categoría'
+    ]
+
+);
     Product::create($request->all());
 
     return redirect()

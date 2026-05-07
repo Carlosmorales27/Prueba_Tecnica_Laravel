@@ -1,5 +1,8 @@
 <x-app-layout>
 
+      <x-slot name="title">
+        Panel Administrativo
+        </x-slot>
     <x-slot name="header">
 
         <h2 class="font-bold text-2xl text-neutral">
