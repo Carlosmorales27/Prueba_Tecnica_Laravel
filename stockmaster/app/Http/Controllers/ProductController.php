@@ -11,12 +11,56 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $products = Product::with('category')->get();
-        return view('products.index', compact('products'));
+  public function index(Request $request)
+{
+    $query = Product::with('category');
+
+    // BUSCADOR
+    if ($request->search) {
+
+        $query->where(function ($q) use ($request) {
+
+            $q->where('name', 'like', '%' . $request->search . '%')
+              ->orWhere('sku', 'like', '%' . $request->search . '%');
+
+        });
     }
 
+    // FILTRO CATEGORIA
+    if ($request->category_id) {
+
+        $query->where('category_id', $request->category_id);
+
+    }
+
+    // ORDENAMIENTO
+    if ($request->sort == 'price_asc') {
+
+        $query->orderBy('price', 'asc');
+
+    }
+
+    if ($request->sort == 'price_desc') {
+
+        $query->orderBy('price', 'desc');
+
+    }
+
+    if ($request->sort == 'stock') {
+
+        $query->orderBy('stock', 'desc');
+
+    }
+
+    $products = $query->get();
+
+    $categories = Category::all();
+
+    return view('products.index', compact(
+        'products',
+        'categories'
+    ));
+}
     /**
      * Show the form for creating a new resource.
      */
@@ -100,6 +144,6 @@ class ProductController extends Controller
 
         return redirect()
             ->route('products.index')
-            ->with('success', 'Producto eliminado');
+        ->with('success', 'Producto eliminado');
     }
 }

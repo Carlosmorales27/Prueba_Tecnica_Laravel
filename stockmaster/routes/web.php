@@ -27,7 +27,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('orders', OrderController::class);
-
+    
+    Route::get('/orders/{order}/pdf',
+    [OrderController::class, 'pdf'])
+    ->name('orders.pdf');
 });
 
 require __DIR__.'/auth.php';

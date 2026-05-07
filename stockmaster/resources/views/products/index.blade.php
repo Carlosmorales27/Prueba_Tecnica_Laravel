@@ -4,7 +4,7 @@
 
         <div class="flex justify-between items-center mb-6">
 
-            <h1 class="text-3xl font-bold">
+            <h1 class="text-3xl font-bold text-neutral">
                 Productos
             </h1>
 
@@ -27,9 +27,73 @@
 
         @endif
 
+        <form method="GET"
+      action="{{ route('products.index') }}"
+      class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+
+    <input type="text"
+           name="search"
+           placeholder="Buscar por nombre o SKU"
+           value="{{ request('search') }}"
+           class="input input-bordered w-full text-neutral">
+
+    <select name="category_id"
+            class="select select-bordered w-full text-neutral">
+
+        <option value="">Todas las categorías</option>
+
+        @foreach($categories as $category)
+
+            <option value="{{ $category->id }}"
+                {{ request('category_id') == $category->id ? 'selected' : '' }}>
+
+                {{ $category->name }}
+
+            </option>
+
+        @endforeach
+
+    </select>
+
+    <select name="sort"
+            class="select select-bordered w-full text-neutral">
+
+        <option value="">Ordenar</option>
+
+        <option value="price_asc"
+            {{ request('sort') == 'price_asc' ? 'selected' : '' }}>
+
+            Precio menor a mayor
+
+        </option>
+
+        <option value="price_desc"
+            {{ request('sort') == 'price_desc' ? 'selected' : '' }}>
+
+            Precio mayor a menor
+
+        </option>
+
+        <option value="stock"
+            {{ request('sort') == 'stock' ? 'selected' : '' }}>
+
+            Mayor stock
+
+        </option>
+
+    </select>
+
+    <button class="btn btn-neutral bg-black">
+
+        Filtrar
+
+    </button>
+
+</form>
+
         <div class="overflow-x-auto bg-base-100 shadow-lg rounded-lg">
 
-            <table class="table table-zebra">
+            <table class="table table-zebra ">
 
                 <thead>
 
@@ -80,7 +144,7 @@
                                     @csrf
                                     @method('DELETE')
 
-                                    <button class="btn btn-error btn-sm">
+                                    <button class="btn btn-error bg-red-700 btn-sm  ">
 
                                         Eliminar
 

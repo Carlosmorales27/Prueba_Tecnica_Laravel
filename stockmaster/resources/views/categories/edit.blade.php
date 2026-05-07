@@ -8,7 +8,7 @@
 
                 <h1 class="text-3xl font-bold mb-4">
 
-                    Editar Categoria
+                    Editar Categoría
 
                 </h1>
 
@@ -45,7 +45,7 @@
                     </div>
                     <button class="btn btn-warning">
 
-                        Actualizar Producto
+                        Actualizar Categoría
 
                     </button>
 

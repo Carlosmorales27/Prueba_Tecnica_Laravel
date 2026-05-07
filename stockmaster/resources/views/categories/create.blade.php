@@ -8,7 +8,7 @@
 
                 <h1 class="text-3xl font-bold mb-4">
 
-                    Nuevo Producto
+                    Nueva Categoría
 
                 </h1>
 
@@ -43,7 +43,7 @@
 
                     <button class="btn btn-primary">
 
-                        Guardar Producto
+                        Guardar Categoría
 
                     </button>
 

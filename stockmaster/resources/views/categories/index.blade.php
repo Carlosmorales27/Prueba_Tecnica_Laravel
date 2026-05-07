@@ -16,6 +16,7 @@
             </a>
 
         </div>
+        
 
         @if(session('success'))
 
@@ -72,7 +73,7 @@
                                     @csrf
                                     @method('DELETE')
 
-                                    <button class="btn btn-error btn-sm">
+                                    <button class="btn btn-error btn-sm bg-red-600">
 
                                         Eliminar
 
